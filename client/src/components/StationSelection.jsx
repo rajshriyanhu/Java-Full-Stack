@@ -17,6 +17,7 @@ const StationsSelection = ({ stations }) => {
   };
 
   const handleGenerateTicket = async () => {
+    setTicket(null)
     setError(null);
     if (startStation === "" || endStation === "") {
       return setError("All station names must be filled");
@@ -120,7 +121,7 @@ const StationsSelection = ({ stations }) => {
       </button>
 
       {error && (
-        <p className="flex truncate items-center mt-6 justify-center text-rose-700">
+        <p className="flex truncate items-center mt-6 justify-center text-red-700">
           {error}
         </p>
       )}
@@ -141,22 +142,22 @@ const StationsSelection = ({ stations }) => {
         </div>
       )}
 
-      {info && (
-        <div className="mt-6 text-red-900">{info}</div>
+      {ticket && info && (
+        <div className="flex truncate items-center mt-6 justify-center text-red-700">{info}</div>
       )}
 
       {
         ticket && <button className="mt-6 text-slate-700 text-sm hover:underline" onClick={handleShowTicketDetails}>Show ticket information</button>
       }
       {showTicket && ticket && (
-        <div className="flex flex-col">
-          <p className="text-md text-slate-800">From : <span className="text-xl text-slate-800">{ticket.startStation}</span></p>
-          <p className="text-md text-slate-800">To : <span className="text-xl text-slate-800">{ticket.endStation}</span></p>
-          <p className="text-md text-slate-800">Price : <span className="text-xl text-slate-800">Rs {ticket.price}</span></p>
-          <p className="text-md text-slate-800">Expire Date: <span className="text-xl text-slate-800">{ticket.expiryTime.split('T')[0]}</span></p>
-          <p className="text-md text-slate-800">Expire Time: <span className="text-xl text-slate-800">{ticket.expiryTime.split('T')[1].split('.')[0]}</span></p>
-          <p className="text-md text-slate-800">Ticket used for entering the station : <span className="text-xl text-slate-800">{ticket.ticketUsedEnter ? "Yes" : "No"}</span></p>
-          <p className="text-md text-slate-800">Ticket used for exiting the station : <span className="text-xl text-slate-800">{ticket.ticketUsedExit ? "Yes" : "No"}</span></p>
+        <div className="flex flex-col border border-black p-4 items-center justify-center rounded-md">
+          <p className="text-md text-slate-800">From : <span className="text-md font-semibold text-slate-800">{ticket.startStation}</span></p>
+          <p className="text-md text-slate-800">To : <span className="text-md font-semibold text-slate-800">{ticket.endStation}</span></p>
+          <p className="text-md text-slate-800">Price : <span className="text-md font-semibold text-slate-800">Rs {ticket.price}</span></p>
+          <p className="text-md text-slate-800">Expire Date: <span className="text-md font-semibold text-slate-800">{ticket.expiryTime.split('T')[0]}</span></p>
+          <p className="text-md text-slate-800">Expire Time: <span className="text-md font-semibold text-slate-800">{ticket.expiryTime.split('T')[1].split('.')[0]}</span></p>
+          <p className="text-md text-slate-800">Ticket used for entering the station : <span className="textmd font-semibold text-slate-800">{ticket.ticketUsedEnter ? "Yes" : "No"}</span></p>
+          <p className="text-md text-slate-800">Ticket used for exiting the station : <span className="textmd font-semibold text-slate-800">{ticket.ticketUsedExit ? "Yes" : "No"}</span></p>
         </div>
       )}
     </div>
